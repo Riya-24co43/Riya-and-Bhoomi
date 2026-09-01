@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Timetable</title>
+</head>
+
+<body>
+
+    <h2>My Timetable</h2>
+
+    <button onclick="showDay('Monday')">Monday</button>
+    <button onclick="showDay('Tuesday')">Tuesday</button>
+    <button onclick="showDay('Wednesday')">Wednesday</button>
+    <button onclick="showDay('Thursday')">Thursday</button>
+    <button onclick="showDay('Friday')">Friday</button>
+    <button onclick="showDay('Saturday')">Saturday</button>
+    <button onclick="showDay('Sunday')">Sunday</button>
+
+    <h3 id="selectedDay">Monday</h3>
+
+    <div id="activities"></div>
+
+    <p id="message"></p>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="patient_timetable.js"></script>
+
+</body>
+</html>
