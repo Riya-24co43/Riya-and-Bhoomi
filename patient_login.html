@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sahara - Patient Login</title>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Font (Nunito) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&display=swap">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f7f6;
+      padding: 20px 10px;
+    }
+
+    /* Card Container */
+    .login-card {
+      width: 100%;
+      max-width: 360px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 36px 24px;
+      border: 1px solid #e5ecee;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+      text-align: center;
+    }
+
+    /* Logo Container */
+    .logo-container {
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Header Titles */
+    .brand-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0d1e25;
+      margin-bottom: 4px;
+    }
+
+    .brand-subtitle {
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
+
+    /* Form Layout */
+    .form-group {
+      text-align: left;
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1.5px solid #1f8ea7;
+      font-size: 15px;
+      color: #334155;
+      outline: none;
+      background-color: #ffffff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-control::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-control:focus {
+      border-color: #156274;
+      box-shadow: 0 0 0 3px rgba(31, 142, 167, 0.15);
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background-color: #006677;
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #005260;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    /* Footer Navigation */
+    .auth-footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 14px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .auth-footer a {
+      color: #006677;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: 4px;
+    }
+
+    /* Message Area */
+    #message {
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #006677;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    
+    <!-- Sahara Exact Logo -->
+    <div class="logo-container">
+      <svg width="70" height="70" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Top Petal -->
+        <path d="M50 7 C38 24 39 38 50 43 C61 38 62 24 50 7 Z" fill="#1F8EA7"/>
+        <!-- Left Petal -->
+        <path d="M27 42 C38 41 44 45 46.5 49 C46 62 45 74 47.5 84.5 C34 82.5 24.5 67 27 42 Z" fill="#1F8EA7"/>
+        <!-- Right Petal -->
+        <path d="M73 42 C62 41 56 45 53.5 49 C51 62 50 74 52.5 84.5 C66 82.5 75.5 67 73 42 Z" fill="#1F8EA7"/>
+      </svg>
+    </div>
+
+    <h2 class="brand-title">Patient Login</h2>
+    <p class="brand-subtitle">Welcome back to Sahara</p>
+
+    <!-- Form -->
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn-submit">Login</button>
+    </form>
+
+    <p id="message"></p>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="register.html">Sign Up</a>
+    </div>
+
+  </div>
+
+  <!-- Supabase JS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Patient JS Logic -->
+  <script src="patient.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sahara - Register</title>
+
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Font (Nunito) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&display=swap">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f7f6;
+      padding: 20px 10px;
+    }
+
+    /* Card Container */
+    .register-card {
+      width: 100%;
+      max-width: 360px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px 24px;
+      border: 1px solid #e5ecee;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Top Logo Header */
+    .brand-header {
+      color: #1f8ea7;
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    /* Welcome Section */
+    .welcome-box {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .welcome-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .welcome-subtitle {
+      font-size: 14px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    /* Section Label */
+    .section-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* Role Selection Toggle */
+    .role-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .role-card {
+      flex: 1;
+      padding: 16px 10px;
+      border-radius: 16px;
+      border: 1.5px solid #e2e8f0;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .role-card i {
+      font-size: 20px;
+      color: #1f8ea7;
+    }
+
+    .role-card span {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* Role Card Selection States */
+    .role-card.active {
+      background: #fee387;
+      border-color: #f7da78;
+    }
+
+    .role-card.active i, 
+    .role-card.active span {
+      color: #1e293b;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+
+    .field-hint {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1.5px solid #1f8ea7;
+      font-size: 15px;
+      color: #334155;
+      outline: none;
+      background-color: #ffffff;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-control::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-control:focus {
+      border-color: #156274;
+      box-shadow: 0 0 0 3px rgba(31, 142, 167, 0.15);
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f8ea7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+    }
+
+    /* Dynamic Hidden Fields */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background-color: #006677;
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #005260;
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    /* Footer Navigation */
+    .login-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .login-footer a {
+      color: #006677;
+      font-weight: 700;
+      text-decoration: underline;
+      margin-left: 4px;
+    }
+
+    /* Output Message Box */
+    #message {
+      margin-top: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      color: #006677;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-card">
+    <h2 class="brand-header">Sahara</h2>
+
+    <div class="welcome-box">
+      <h3 class="welcome-title">Welcome</h3>
+      <p class="welcome-subtitle">Create your account</p>
+    </div>
+
+    <!-- Role Selection -->
+    <span class="section-label">I am a...</span>
+    <div class="role-container">
+      <div class="role-card active" id="rolePatient">
+        <i class="fas fa-user"></i>
+        <span>Patient</span>
+      </div>
+      <div class="role-card" id="roleCaregiver">
+        <i class="far fa-heart"></i>
+        <span>Caregiver</span>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <form id="registerForm">
+      
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+      </div>
+
+      <!-- Username -->
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" class="form-control" placeholder="johndoe123" required>
+      </div>
+
+      <!-- Age (Patient only) -->
+      <div class="form-group" id="groupAge">
+        <label for="age">Age</label>
+        <input type="number" id="age" class="form-control" placeholder="75">
+      </div>
+
+      <!-- Language (Patient only) -->
+      <div class="form-group" id="groupLanguage">
+        <label for="language">Language</label>
+        <select id="language" class="form-control">
+          <option value="English">English</option>
+          <option value="Spanish">Spanish</option>
+          <option value="Hindi">Hindi</option>
+        </select>
+      </div>
+
+      <!-- Relation (Caregiver only) -->
+      <div class="form-group hidden" id="groupRelation">
+        <label for="relation">Relation to Patient</label>
+        <input type="text" id="relation" class="form-control" placeholder="Son, Daughter, Nurse">
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+      </div>
+
+      <!-- Connection Code (Caregiver only) -->
+      <div class="form-group hidden" id="groupConnectionCode">
+        <label for="patient_code">Connection Code</label>
+        <p class="field-hint">Enter the patient code generated during patient registration.</p>
+        <input type="text" id="patient_code" class="form-control" placeholder="E.G. PAT-A7B9X2">
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn-submit">Sign Up</button>
+
+      <!-- Message Area -->
+      <div id="message"></div>
+    </form>
+
+    <div class="login-footer">
+      Already have an account? <a href="patient_login.html" id="linkLogin">Log In</a>
+    </div>
+  </div>
+
+  <!-- External JavaScript file linked here -->
+  <script src="patient.js"></script>
+</body>
+</html>
